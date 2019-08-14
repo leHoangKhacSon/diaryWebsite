@@ -1,0 +1,79 @@
+<!-- hien thi textarea nhap status va kem them cam xuc da chon tu trang index -->
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>STATUS</title>
+</head>
+<body>
+	<textarea id = "status-content" placeholder="STATUS"></textarea>
+	<ul id = "icon">
+		
+	</ul>
+	<button id = "save-status">LUU</button>
+
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript">
+		// lay id cam xuc
+		var index = parseInt(window.location.hash[1]);
+		var iconList = document.getElementById("icon");
+		var saveStatus = document.getElementById('save-status');
+		var statusContent = document.getElementById('status-content');
+		var url = 'http://localhost:5001/list-status';
+
+		// hien thi cam xuc
+		switch (index){
+			case 1:
+				var iconClick = '<button>CAM XUC 1</button>';
+				iconList.innerHTML = iconClick;
+				break;
+			case 2:
+				var iconClick = '<button>CAM XUC 2</button>';
+				iconList.innerHTML = iconClick;
+				break;
+			case 3:
+				var iconClick = '<button>CAM XUC 3</button>';
+				iconList.innerHTML = iconClick;
+				break;
+			case 4:
+				var iconClick = '<button>CAM XUC 4</button>';
+				iconList.innerHTML = iconClick;
+				break;
+			case 5:
+				var iconClick = '<button>CAM XUC 5</button>';
+				iconList.innerHTML = iconClick;
+				break;
+			case 6:
+				var iconClick = '<button>CAM XUC 6</button>';
+				iconList.innerHTML = iconClick;
+				break;
+			default:
+				console.log("khong co lua chon");
+		}
+
+		// luu status vao db.json khi click luu
+		// chuyen sang showstatus page khi click LUU
+		var input = statusContent.value; 	// lay gia tri nhap vao
+
+		saveStatus.addEventListener('click', function(){
+			if(input){
+				var inputContent = {
+					status: input
+				};
+				axios.post(url, inputContent)
+				.then(function(response){
+					console.log('luu thanh cong')
+				})
+				.catch(function(error){
+					console.log('luu that bai');
+				});
+				// xoa value nhap vao
+				statusContent.value = '';
+			}
+			// chuyen den showstatus page
+			window.location.href = "./showstatus.html#" + index;
+		});
+	</script>
+</body>
+</html>
