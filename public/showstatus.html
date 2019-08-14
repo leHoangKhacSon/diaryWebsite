@@ -1,0 +1,42 @@
+<!-- sau khi viet status va chon luu thi chuyen toi trang showstatus
+	trang nay hien thi status va cam xuc nguoi dung da viet
+	xong demo tren db.json thi chuyen qua cloud firestore
+ -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SHOW STATUS</title>
+</head>
+<body>
+	<ul id = "id-status">
+		
+	</ul>
+
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript">
+		var url = 'http://localhost:5001/list-status';
+		var statusList = document.getElementById("id-status");
+
+		// lay du lieu tu db.json
+		axios.get(url).then(function(response){
+			var status = response.data;
+			// render(status);
+			render(status);
+		})
+		.catch(function(error){
+			console.log('error');
+		});
+
+		// ham in status
+		function render(statuss){
+			// lay ra chuoi status
+			var statussList = statuss.map(function(stt){
+				return '<li>' + stt.status + '</li>';
+			});
+			statusList.innerHTML = statussList.join('');
+		}
+
+	</script>
+</body>
+</html>
