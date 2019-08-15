@@ -1,0 +1,40 @@
+body {
+	font-family: sans-serif;;
+	font-size: 16px;
+	background-color: #EEE;
+}
+
+p {
+	color: #8c174f;
+	font-weight: bold;
+	margin-left: 20px;
+}
+
+#icon-list li {
+	list-style: none;
+}
+
+#icon-list li i:hover {
+	color: #cba01c;
+	font-size: 300%;
+}
+
+#status-content {
+	height: 100px;
+	width: 800px;
+	margin-left: 20%;
+}
+
+#save-status {
+	color: white;
+	font-weight: bold;
+	padding: 10px 20px;
+	margin-left: 50%;
+	background-color: #4f5782;
+	border-radius: 5px;
+	border: none;
+}
+
+#save-status: hover {
+	background-color: red;
+}
