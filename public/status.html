@@ -7,13 +7,16 @@
 <html>
 <head>
 	<title>STATUS</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
+        integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 </head>
 <body>
 	<textarea id = "status-content" placeholder="STATUS"></textarea>
 	<ul id = "icon">
 		
 	</ul>
-	<button id = "save-status">LUU</button>
+	<button id = "save-status">SAVE</button>
 
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script type="text/javascript">
@@ -22,32 +25,32 @@
 		var iconList = document.getElementById("icon");
 		var saveStatus = document.getElementById('save-status');
 		var statusContent = document.getElementById('status-content');
-		var url = 'http://localhost:5001/list-status';
+		var url = 'http://localhost:9001/list-status';
 
 		// hien thi cam xuc
 		switch (index){
 			case 1:
-				var iconClick = '<button>CAM XUC 1</button>';
+				var iconClick = '<i class="fas fa-grin-squint fa-2x"></i>';
 				iconList.innerHTML = iconClick;
 				break;
 			case 2:
-				var iconClick = '<button>CAM XUC 2</button>';
+				var iconClick = '<i class="fas fa-sad-tear fa-2x"></i>';
 				iconList.innerHTML = iconClick;
 				break;
 			case 3:
-				var iconClick = '<button>CAM XUC 3</button>';
+				var iconClick = '<i class="fas fa-tired fa-2x"></i>';
 				iconList.innerHTML = iconClick;
 				break;
 			case 4:
-				var iconClick = '<button>CAM XUC 4</button>';
+				var iconClick = '<i class="fas fa-sad-cry fa-2x"></i>';
 				iconList.innerHTML = iconClick;
 				break;
 			case 5:
-				var iconClick = '<button>CAM XUC 5</button>';
+				var iconClick = '<i class="fas fa-kiss-wink-heart fa-2x"></i>';
 				iconList.innerHTML = iconClick;
 				break;
 			case 6:
-				var iconClick = '<button>CAM XUC 6</button>';
+				var iconClick = '<i class="fas fa-grin-stars fa-2x"></i>';
 				iconList.innerHTML = iconClick;
 				break;
 			default:
@@ -56,26 +59,31 @@
 
 		// luu status vao db.json khi click luu
 		// chuyen sang showstatus page khi click LUU
-		var input = statusContent.value; 	// lay gia tri nhap vao
+		
+		saveStatus.addEventListener('click', saveContentStatus);
 
-		saveStatus.addEventListener('click', function(){
+		// them status vao db.json -> showstatus page
+		function saveContentStatus(){
+			var input = statusContent.value; 	// lay gia tri nhap vao
 			if(input){
 				var inputContent = {
 					status: input
 				};
-				axios.post(url, inputContent)
+				axios.post(url, inputContent)	
 				.then(function(response){
-					console.log('luu thanh cong')
+					console.log(response);
 				})
 				.catch(function(error){
-					console.log('luu that bai');
+					console.log(error);
 				});
 				// xoa value nhap vao
 				statusContent.value = '';
+				// chuyen den showstatus page
+				window.location.href = "./showstatus.html#" + index;
+			} else {
+				alert('ban chua nhap status!');
 			}
-			// chuyen den showstatus page
-			window.location.href = "./showstatus.html#" + index;
-		});
+		}
 	</script>
 </body>
 </html>
